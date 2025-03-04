@@ -16,6 +16,16 @@ namespace Movies.Api.Mapping
                 YearOfRelease = request.YearOfRelease
             };
         }
+        public static Movie MapToMovie(this UpdateMovieRequest request, Guid id)
+        {
+            return new Movie
+            {
+                Id = id,
+                Genres = request.Genres.ToList(),
+                Title = request.Title,
+                YearOfRelease = request.YearOfRelease
+            };
+        }
 
         public static MovieResponse MapToResponse(this Movie movie)
         {
@@ -23,8 +33,16 @@ namespace Movies.Api.Mapping
             {
                 Id = movie.Id,
                 Genres = movie.Genres.ToList(),
-                Title = movie   .Title,
+                Slug = movie.Slug,
+                Title = movie.Title,
                 YearOfRelease = movie.YearOfRelease
+            };
+        }
+        public static MoviesResponse MapToResponse(this IEnumerable<Movie> movies)
+        {
+            return new MoviesResponse
+            {
+                Items = movies.Select(MapToResponse)
             };
         }
     }

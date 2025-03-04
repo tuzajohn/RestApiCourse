@@ -1,0 +1,12 @@
+﻿version: '3.9'
+
+services:
+  db:
+    image: postgress:latest
+    restart: always
+    environment:
+      POSTGRES_DB: movies
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: pass123
+    ports:
+      - 5432:5432 
